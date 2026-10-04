@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500,100,1&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add("js")</script>
   <style>
     :root {
       color-scheme: dark;
@@ -30,7 +31,7 @@
       --accent: #e09a5f;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; }
+    html, body { margin: 0; }
     body {
       background: var(--bg);
       color: var(--ink);
@@ -38,7 +39,7 @@
       display: grid;
       place-items: center;
       min-height: 100svh;
-      padding: 24px 16px;
+      padding: 24px 16px 56px;
     }
     main {
       display: flex;
@@ -77,6 +78,40 @@
       overflow-wrap: anywhere;
     }
     a:hover, a:focus-visible { border-bottom-color: var(--accent); }
+    .floor {
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: min(720px, 92vw);
+      margin-top: 56px;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .js .floor { display: grid; }
+    .floor.ready { opacity: 1; }
+    .tile {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+    }
+    .tile img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      filter: brightness(0.82);
+      transition: opacity 2s ease, filter 0.4s ease;
+    }
+    .tile img.on { opacity: 1; }
+    .tile:hover img { filter: brightness(1); }
+    @media (max-width: 600px) {
+      .floor { grid-template-columns: repeat(2, 1fr); width: min(420px, 100%); margin-top: 40px; }
+      .tile:nth-child(n + 5) { display: none; }
+    }
     @media (max-width: 380px) {
       body { padding: 32px 20px; }
       main { gap: 16px; }
@@ -94,6 +129,90 @@
     </picture>
     <h1>Little Urchin Workshop</h1>
     <a href="mailto:info@littleurchinworkshop.com">info@littleurchinworkshop.com</a>
+    <section class="floor" aria-hidden="true">
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
+    </section>
   </main>
+  <script>
+    // Workshop floor: a random 8 of the little monsters, one tile crossfading to a new monster
+    // every ~5s. Only one fade at a time, and a monster never shows in two tiles at once.
+    (() => {
+      const floor = document.querySelector(".floor");
+      const tiles = [...floor.querySelectorAll(".tile")];
+      const FADE = 2000, GAP_MIN = 2500, GAP_MAX = 4500;
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const shuffle = (a) => {
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      };
+      const load = (img, id) => {
+        img.srcset = `/assets/grid/${id}-256.webp 256w, /assets/grid/${id}-512.webp 512w`;
+        img.src = `/assets/grid/${id}-512.webp`;
+        img.dataset.id = id;
+        return img.decode().catch(() => {});
+      };
+
+      fetch("/assets/grid/manifest.json")
+        .then((r) => r.json())
+        .then(async (ids) => {
+          // Same-seed renders (figurine vs puppet wording) are near-twins, so they count as one monster.
+          const fam = (id) => id.slice(id.lastIndexOf("_") + 1);
+          if (new Set(ids.map(fam)).size <= tiles.length) return;
+          const onScreen = new Set();
+          let deck = shuffle([...ids]);
+          const next = () => {
+            if (!deck.length) deck = shuffle(ids.filter((id) => !onScreen.has(fam(id))));
+            let id = deck.pop();
+            while (id != null && onScreen.has(fam(id))) id = deck.length ? deck.pop() : null;
+            return id;
+          };
+
+          await Promise.all(tiles.map((t) => {
+            const id = next();
+            onScreen.add(fam(id));
+            const img = t.firstElementChild;
+            img.style.transition = "none";  // first set arrives with the grid, not as 8 separate fades
+            img.classList.add("on");
+            return load(img, id);
+          }));
+          floor.classList.add("ready");
+          floor.offsetHeight;
+          tiles.forEach((t) => (t.firstElementChild.style.transition = ""));
+          if (still) return;
+
+          let timer, last = -1;
+          const schedule = (ms) => { clearTimeout(timer); timer = setTimeout(swap, ms); };
+          const swap = async () => {
+            if (document.hidden) return;
+            const visible = tiles.map((t, i) => i).filter((i) => tiles[i].offsetParent && i !== last);
+            const i = visible[Math.floor(Math.random() * visible.length)];
+            const [a, b] = tiles[i].children;
+            const front = a.classList.contains("on") ? a : b, back = front === a ? b : a;
+            const id = next();
+            if (id == null) return schedule(GAP_MIN);
+            onScreen.add(fam(id));
+            await load(back, id);
+            back.classList.add("on");
+            front.classList.remove("on");
+            onScreen.delete(fam(front.dataset.id));
+            last = i;
+            schedule(FADE + GAP_MIN + Math.random() * (GAP_MAX - GAP_MIN));
+          };
+          document.addEventListener("visibilitychange", () => document.hidden ? clearTimeout(timer) : schedule(GAP_MIN));
+          schedule(GAP_MIN + Math.random() * (GAP_MAX - GAP_MIN));
+        })
+        .catch(() => {});
+    })();
+  </script>
 </body>
 </html>
