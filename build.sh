@@ -25,7 +25,7 @@ magick -size 1200x630 "xc:$BG" \
   -gravity west -fill "#f1e6d8" -font tools/Fraunces-500.ttf -pointsize 64 \
   -annotate +690-70 "Little Urchin" -annotate +690+10 "Workshop" \
   -fill "#a8917c" -font tools/Fraunces-Italic-400.ttf -pointsize 34 \
-  -annotate +692+90 "Built by hand. Built to last." \
+  -annotate +692+90 "Craftsmanship, start to finish." \
   -strip -quality 85 "$A/og-image.jpg"
 
 ls -la "$A"
