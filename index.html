@@ -142,7 +142,7 @@
   </main>
   <script>
     // Workshop floor: a random 8 of the little monsters, one tile crossfading to a new monster
-    // right after the previous fade ends (~0.75-1s pause). Only one fade at a time, and a monster never shows in two tiles at once.
+    // right after the previous fade ends (~0.75-1s pause). Only one fade at a time, and never two monsters from the same scene at once.
     (() => {
       const floor = document.querySelector(".floor");
       const tiles = [...floor.querySelectorAll(".tile")];
@@ -165,15 +165,24 @@
       fetch("/assets/grid/manifest.json")
         .then((r) => r.json())
         .then(async (ids) => {
-          // Same-seed renders (figurine vs puppet wording) are near-twins, so they count as one monster.
-          const fam = (id) => id.slice(id.lastIndexOf("_") + 1);
+          // One monster per scene on screen: renders from the same prompt (same round + action,
+          // any seed, figurine or puppet wording, any cfg) look alike, so they share a family.
+          // e.g. r10_spoolpup2_8783015545311 and r10_spoolpup3_28919616181774 are both "r10_spool".
+          const fam = (id) => id.replace(/_\d+$/, "").replace(/(fig|pup)\d$/, "");
           if (new Set(ids.map(fam)).size <= tiles.length) return;
           const onScreen = new Set();
           let deck = shuffle([...ids]);
-          const next = () => {
-            if (!deck.length) deck = shuffle(ids.filter((id) => !onScreen.has(fam(id))));
+          const draw = () => {
             let id = deck.pop();
-            while (id != null && onScreen.has(fam(id))) id = deck.length ? deck.pop() : null;
+            while (id != null && onScreen.has(fam(id))) id = deck.pop();
+            return id;
+          };
+          const next = () => {
+            let id = draw();
+            if (id == null) {  // deck ran dry: reshuffle everything not on screen and try again
+              deck = shuffle(ids.filter((i) => !onScreen.has(fam(i))));
+              id = draw();
+            }
             return id;
           };
 
