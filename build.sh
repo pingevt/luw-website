@@ -18,12 +18,14 @@ done
 
 # Favicons are the Fraunces "L", made separately by tools/favicon.py
 
-# Link-preview image: monster on the left, name on the right, page background color
+# Link-preview image: monster on the left, name + tagline on the right, in Fraunces (fonts are OFL)
 BG="#0d0b0a"
 magick -size 1200x630 "xc:$BG" \
   \( "$SRC" -resize 630x630 \) -gravity west -composite \
-  -gravity west -fill "#f1e6d8" -font "Georgia" -pointsize 64 \
-  -annotate +700-40 "Little Urchin" -annotate +700+40 "Workshop" \
+  -gravity west -fill "#f1e6d8" -font tools/Fraunces-500.ttf -pointsize 64 \
+  -annotate +690-70 "Little Urchin" -annotate +690+10 "Workshop" \
+  -fill "#a8917c" -font tools/Fraunces-Italic-400.ttf -pointsize 34 \
+  -annotate +692+90 "Built by hand. Built to last." \
   -strip -quality 85 "$A/og-image.jpg"
 
 ls -la "$A"
