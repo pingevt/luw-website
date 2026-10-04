@@ -16,9 +16,7 @@ for w in 640 1024; do
     || { magick "$SRC" -resize ${w}x${w} "$A/tmp.png"; avifenc -q 60 -s 6 "$A/tmp.png" "$A/hero-$w.avif" >/dev/null; rm "$A/tmp.png"; }
 done
 
-# Favicon: center crop on the face, 64px + 180px apple-touch
-magick "$SRC" -gravity center -crop 55%x55%+0-8% +repage -resize 64x64 -strip "$A/favicon-64.png"
-magick "$SRC" -gravity center -crop 55%x55%+0-8% +repage -resize 180x180 -strip "$A/apple-touch-icon.png"
+# Favicons are the Fraunces "L", made separately by tools/favicon.py
 
 # Link-preview image: monster on the left, name on the right, page background color
 BG="#0d0b0a"

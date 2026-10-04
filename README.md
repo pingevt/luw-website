@@ -4,3 +4,4 @@ Placeholder site for Little Urchin Workshop LLC: one little-monster hero, the na
 
 - Swap the hero: `./build.sh path/to/new-render.png` (square ComfyUI render, 1024px+), then commit `src/` + `assets/`
 - Hero renders come from the ComfyUI "Little Monsters - hero" workflow. Prompts say "little monster", never "urchin" (that pulls sea-urchin spikes).
+- Favicons: the "L" from Fraunces (the title font), light/dark aware. Regenerate with `tools/favicon.py` (instructions at the top of that file).
