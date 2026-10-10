@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Little Urchin Workshop · Craftsmanship, start to finish.</title>
+  <title>Little Urchin Workshop · Technology consulting</title>
   <link rel="canonical" href="https://littleurchinworkshop.com/">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-light-32.png" sizes="32x32" type="image/png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/assets/favicon-dark-32.png" sizes="32x32" type="image/png" media="(prefers-color-scheme: dark)">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <meta name="description" content="Systems engineering for the web: CMS architecture, Drupal, data pipelines, and AI that earns its keep.">
+  <meta name="description" content="A technology consultancy in Ardmore, PA: software engineering, systems integration, data, and AI, built carefully and kept running.">
   <meta name="theme-color" content="#0d0b0a">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://littleurchinworkshop.com/">
-  <meta property="og:title" content="Little Urchin Workshop · Craftsmanship, start to finish.">
-  <meta property="og:description" content="Systems engineering for the web: CMS architecture, Drupal, data pipelines, and AI that earns its keep.">
+  <meta property="og:title" content="Little Urchin Workshop · Technology consulting">
+  <meta property="og:description" content="A technology consultancy in Ardmore, PA: software engineering, systems integration, data, and AI, built carefully and kept running.">
   <meta property="og:image" content="https://littleurchinworkshop.com/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,500,100,1;1,9..144,400,100,1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400,100,1;0,9..144,500,100,1;1,9..144,400,100,1&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,7 +34,7 @@
         "url": "https://littleurchinworkshop.com/",
         "email": "info@littleurchinworkshop.com",
         "slogan": "Craftsmanship, start to finish.",
-        "description": "Systems engineering for the web: CMS architecture, Drupal, data pipelines, and AI that earns its keep.",
+        "description": "A technology consultancy in Ardmore, PA: software engineering, systems integration, data, and AI, built carefully and kept running.",
         "logo": "https://littleurchinworkshop.com/assets/apple-touch-icon.png",
         "image": "https://littleurchinworkshop.com/assets/og-image.jpg",
         "address": {
@@ -54,14 +54,13 @@
           ]
         },
         "knowsAbout": [
-          "Systems engineering",
+          "Software engineering",
+          "Systems integration",
+          "Data pipelines",
+          "AI integration",
           "Content management systems",
           "Drupal",
-          "PHP",
-          "Data integration",
-          "Museum collections data",
-          "Full-text search",
-          "AI integration"
+          "Search"
         ]
       },
       {
@@ -76,7 +75,6 @@
     ]
   }
   </script>
-  <script>document.documentElement.classList.add("js")</script>
   <style>
     :root {
       color-scheme: dark;
@@ -91,203 +89,75 @@
       background: var(--bg);
       color: var(--ink);
       font-family: "Fraunces", Georgia, serif;
-      display: grid;
-      place-items: center;
-      min-height: 100svh;
-      padding: 24px 16px 56px;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      padding: clamp(48px, 12vh, 120px) 16px 48px;
     }
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 12px;
-      max-width: 100%;
-    }
-    picture { display: block; position: relative; z-index: 0; width: min(360px, 88vw); aspect-ratio: 1; }
-    picture img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 70%);
-              mask-image: radial-gradient(circle at 50% 50%, #000 52%, transparent 70%);
-    }
-    h1, a {
-      position: relative;
-      z-index: 1;
-      text-shadow: 0 1px 14px rgb(0 0 0 / 0.7);
-    }
+    main, footer { max-width: 36rem; margin: 0 auto; }
     h1 {
-      margin: -0.75rem 0 0;
+      margin: 0;
       font-weight: 500;
-      font-size: clamp(1.9rem, 6vw, 3rem);
+      font-size: clamp(2rem, 7vw, 3rem);
       letter-spacing: -0.01em;
       line-height: 1.05;
     }
     .tagline {
-      margin: -2px 0 4px;
+      margin: 8px 0 40px;
       color: var(--muted);
-      font-size: clamp(1rem, 3.4vw, 1.2rem);
       font-style: italic;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      position: relative;
-      z-index: 1;
+      font-size: clamp(1.05rem, 3.4vw, 1.25rem);
     }
+    h2 {
+      margin: 40px 0 8px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 0; padding-left: 1.1em; }
+    li { margin: 4px 0; }
+    li::marker { color: var(--accent); }
     a {
       color: var(--accent);
-      font-size: clamp(1rem, 3.6vw, 1.2rem);
       text-decoration: none;
       border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-      padding-bottom: 2px;
       overflow-wrap: anywhere;
     }
     a:hover, a:focus-visible { border-bottom-color: var(--accent); }
-    .floor {
-      display: none;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      width: min(720px, 92vw);
-      margin-top: 56px;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-    }
-    .js .floor { display: grid; }
-    .floor.ready { opacity: 1; }
-    .tile {
-      position: relative;
-      aspect-ratio: 1;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #000;
-    }
-    .tile img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      filter: brightness(0.82);
-      transition: opacity 2s ease, filter 0.4s ease;
-    }
-    .tile img.on { opacity: 1; }
-    .tile:hover img { filter: brightness(1); }
-    @media (max-width: 600px) {
-      .floor { grid-template-columns: repeat(2, 1fr); width: min(420px, 100%); margin-top: 40px; }
-      .tile:nth-child(n + 5) { display: none; }
-    }
-    @media (max-width: 380px) {
-      body { padding: 32px 20px; }
-      main { gap: 16px; }
-      h1 { margin-top: 0.25rem; font-size: 1.7rem; line-height: 1.12; }
-      a { font-size: 0.95rem; }
+    footer {
+      margin-top: 64px;
+      padding-top: 16px;
+      border-top: 1px solid #2a2420;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <main>
-    <picture>
-      <source type="image/avif" srcset="/assets/hero-640.avif 640w, /assets/hero-1024.avif 1024w" sizes="(min-width: 410px) 360px, 88vw">
-      <source type="image/webp" srcset="/assets/hero-640.webp 640w, /assets/hero-1024.webp 1024w" sizes="(min-width: 410px) 360px, 88vw">
-      <img src="/assets/hero-1024.jpg" srcset="/assets/hero-640.jpg 640w, /assets/hero-1024.jpg 1024w" sizes="(min-width: 410px) 360px, 88vw" width="1024" height="1024" alt="A small slate-blue monster in a patched little coat, holding up a glowing lantern on a dark workbench">
-    </picture>
     <h1>Little Urchin Workshop</h1>
     <p class="tagline">Craftsmanship, start to finish.</p>
-    <a href="mailto:info@littleurchinworkshop.com">info@littleurchinworkshop.com</a>
-    <section class="floor" aria-hidden="true">
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-      <div class="tile"><img alt="" sizes="(max-width: 600px) 45vw, 180px"><img alt="" sizes="(max-width: 600px) 45vw, 180px"></div>
-    </section>
+
+    <p>Little Urchin Workshop is a technology consultancy in Ardmore, PA. Software engineering, systems integration, data, and AI for organizations that need things built carefully and kept running.</p>
+
+    <h2>Services</h2>
+    <ul>
+      <li>Software and systems engineering</li>
+      <li>Integrations and data pipelines</li>
+      <li>AI built into existing platforms</li>
+      <li>Ongoing support and maintenance</li>
+    </ul>
+
+    <h2>Who</h2>
+    <p>Founded and run by <a href="https://peteinge.com/">Pete Inge</a>, an engineer who has spent years building and keeping up the systems behind museums, universities, and cultural institutions. More on <a href="https://www.linkedin.com/in/pete-inge-55a8128/">LinkedIn</a>.</p>
+
+    <h2>Contact</h2>
+    <p><a href="mailto:info@littleurchinworkshop.com">info@littleurchinworkshop.com</a><br>Ardmore, Pennsylvania</p>
   </main>
-  <script>
-    // Workshop floor: a random 8 of the little monsters, one tile crossfading to a new monster
-    // right after the previous fade ends (~0.75-1s pause). Only one fade at a time, and never two monsters from the same scene at once.
-    (() => {
-      const floor = document.querySelector(".floor");
-      const tiles = [...floor.querySelectorAll(".tile")];
-      const FADE = 2000, GAP_MIN = 750, GAP_MAX = 1000;  // pause after each fade finishes
-      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const shuffle = (a) => {
-        for (let i = a.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-      };
-      const load = (img, id) => {
-        img.srcset = `/assets/grid/${id}-256.webp 256w, /assets/grid/${id}-512.webp 512w`;
-        img.src = `/assets/grid/${id}-512.webp`;
-        img.dataset.id = id;
-        return img.decode().catch(() => {});
-      };
-
-      fetch("/assets/grid/manifest.json")
-        .then((r) => r.json())
-        .then(async (ids) => {
-          // One monster per scene on screen: renders from the same prompt (same round + action,
-          // any seed, figurine or puppet wording, any cfg) look alike, so they share a family.
-          // e.g. r10_spoolpup2_8783015545311 and r10_spoolpup3_28919616181774 are both "r10_spool".
-          const fam = (id) => id.replace(/_\d+$/, "").replace(/(fig|pup)\d$/, "");
-          if (new Set(ids.map(fam)).size <= tiles.length) return;
-          const onScreen = new Set();
-          let deck = shuffle([...ids]);
-          const draw = () => {
-            let id = deck.pop();
-            while (id != null && onScreen.has(fam(id))) id = deck.pop();
-            return id;
-          };
-          const next = () => {
-            let id = draw();
-            if (id == null) {  // deck ran dry: reshuffle everything not on screen and try again
-              deck = shuffle(ids.filter((i) => !onScreen.has(fam(i))));
-              id = draw();
-            }
-            return id;
-          };
-
-          await Promise.all(tiles.map((t) => {
-            const id = next();
-            onScreen.add(fam(id));
-            const img = t.firstElementChild;
-            img.style.transition = "none";  // first set arrives with the grid, not as 8 separate fades
-            img.classList.add("on");
-            return load(img, id);
-          }));
-          floor.classList.add("ready");
-          floor.offsetHeight;
-          tiles.forEach((t) => (t.firstElementChild.style.transition = ""));
-          if (still) return;
-
-          let timer, last = -1;
-          const schedule = (ms) => { clearTimeout(timer); timer = setTimeout(swap, ms); };
-          const swap = async () => {
-            if (document.hidden) return;
-            const visible = tiles.map((t, i) => i).filter((i) => tiles[i].offsetParent && i !== last);
-            const i = visible[Math.floor(Math.random() * visible.length)];
-            const [a, b] = tiles[i].children;
-            const front = a.classList.contains("on") ? a : b, back = front === a ? b : a;
-            const id = next();
-            if (id == null) return schedule(GAP_MIN);
-            onScreen.add(fam(id));
-            await load(back, id);
-            back.classList.add("on");
-            front.classList.remove("on");
-            onScreen.delete(fam(front.dataset.id));
-            last = i;
-            schedule(FADE + GAP_MIN + Math.random() * (GAP_MAX - GAP_MIN));
-          };
-          document.addEventListener("visibilitychange", () => document.hidden ? clearTimeout(timer) : schedule(GAP_MIN));
-          schedule(2000 + Math.random() * 1000);  // first swap shortly after the grid appears
-        })
-        .catch(() => {});
-    })();
-  </script>
+  <footer>
+    &copy; 2026 Little Urchin Workshop LLC &middot; <a href="/privacy.html">Privacy</a>
+  </footer>
 </body>
 </html>
